@@ -24,14 +24,14 @@ targets:
     mode: development
     default: true
     workspace:
-      host: https://community.cloud.databricks.com
+      host: https://dbc-55c726ba-bdfb.cloud.databricks.com
     variables:
       catalog: data-growth
 
   qa:
     mode: production
     workspace:
-      host: https://community.cloud.databricks.com
+      host: https://dbc-55c726ba-bdfb.cloud.databricks.com
       root_path: /Workspace/dab-practice/${workspace.current_user.short_name}/${bundle.target}/.bundle
       file_path:  /Workspace/dab-practice/${workspace.current_user.short_name}/${bundle.target}/
     run_as:
@@ -44,7 +44,7 @@ targets:
   prod:
     mode: production
     workspace:
-      host: https://community.cloud.databricks.com
+      host: https://dbc-55c726ba-bdfb.cloud.databricks.com
       root_path: /Workspace/dab-practice/${workspace.current_user.short_name}/${bundle.target}/.bundle
       file_path:  /Workspace/dab-practice/${workspace.current_user.short_name}/${bundle.target}/
     run_as:
