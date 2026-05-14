@@ -7,7 +7,7 @@ variables:
   schema:
     default: ${resources.schemas.dab_schema.name}
   volume_path:
-    default: /Volumes/${var.catalog}/${var.schema}/landing_zone
+    default: /Volumes/${var.catalog}/${var.schema}/landing_zone/
 
 presets:
   tags:
