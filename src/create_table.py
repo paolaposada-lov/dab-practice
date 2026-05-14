@@ -13,7 +13,7 @@ df = (
     spark.read.format("csv")
     .option("header", "true")
     .option("inferSchema", "true")
-    .load(f"/Volumes/{catalog}/{schema}/inputs/")
+    .load(f"/Volumes/{catalog}/{schema}/landing_zone/")
 )
 
 display(df)
