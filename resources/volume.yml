@@ -1,0 +1,8 @@
+resources:
+  volumes:
+    dab_volume:
+      name: landing_zone
+      catalog_name: ${var.catalog}
+      schema_name:  ${var.schema}
+      volume_type:  MANAGED
+      comment: "Volumen dropzone para archivos CSV entrantes"

@@ -1,0 +1,36 @@
+resources:
+  jobs:
+    dab_practice_job:
+      name: dab_practice_job
+
+      #Trigger: se dispara cuando llega un archivo nuevo al volumen 
+      trigger:
+        file_arrival:
+          url: ${var.volume_path}
+        pause_status: PAUSED
+
+      parameters:
+        - name: catalog
+          default: ${var.catalog}
+        - name: schema
+          default: ${var.schema}
+
+      email_notifications:
+        on_failure:
+          - paola.posada@lovelytics.com
+
+      tasks:
+        # Task 1: notebook de ingesta
+        - task_key: ingest_task
+          notebook_task:
+            notebook_path: ../src/create_table
+            base_parameters:
+              catalog: "{{job.parameters.catalog}}"
+              schema:  "{{job.parameters.schema}}"
+
+        # Task 2: pipeline DLT (depende de que Task 1 termine bien)
+        - task_key: pipeline_task
+          depends_on:
+            - task_key: ingest_task
+          pipeline_task:
+            pipeline_id: ${resources.pipelines.etl_pipeline.id}

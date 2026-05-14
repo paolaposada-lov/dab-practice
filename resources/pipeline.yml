@@ -1,0 +1,24 @@
+resources:
+  pipelines:
+    dab_pipeline:
+      name: dab_pipeline
+
+      #Configuración del pipeline
+      serverless: true          # usa compute serverless, no cluster dedicado
+      channel: CURRENT          # versión estable de DLT
+      continuous: false         # triggered (no corre continuamente)
+      development: false        # modo producción por defecto
+
+      # Catálogo y schema donde escribirá las tablas
+      catalog: ${var.catalog}
+      target:  ${var.schema}  
+
+      # Archivo SQL que contiene la lógica del pipeline
+      libraries:
+        - file:
+            path: ../src/etl_pipeline.sql
+
+      # ── Parámetros que puede recibir el pipeline ──────────────────────
+      configuration:
+        catalog: ${var.catalog}
+        schema:  ${var.schema}

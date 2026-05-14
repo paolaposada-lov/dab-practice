@@ -1,0 +1,6 @@
+resources:
+  schemas:
+    dab_schema:
+      name: dab_${bundle.target}
+      catalog_name: ${var.catalog}
+      comment: "Schema para el bundle ${bundle.name} en entorno ${bundle.target}"

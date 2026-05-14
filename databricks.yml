@@ -1,0 +1,66 @@
+bundle:
+  name: dab-practice
+
+variables:
+  catalog:
+    default: data-growth
+  schema:
+    default: ${resources.schemas.dab_schema.name}
+  volume_path:
+    default: ${resources.volumes.dab_volume.full_name}
+
+presets:
+  tags:
+    project: ${bundle.name}
+    env:     ${bundle.target}
+  trigger_pause_status: PAUSED
+
+include:
+  - resources/*.yml
+
+targets:
+
+  dev:
+    mode: development
+    default: true
+    workspace:
+      host: https://community.cloud.databricks.com
+    variables:
+      catalog: data-growth
+
+  qa:
+    mode: production
+    workspace:
+      host: https://community.cloud.databricks.com
+      root_path: /Workspace/dab-practice/${workspace.current_user.short_name}/${bundle.target}/.bundle
+      file_path:  /Workspace/dab-practice/${workspace.current_user.short_name}/${bundle.target}/
+    run_as:
+      user_name: paola.posada@lovelytics.com
+    variables:
+      catalog: data-growth
+    presets:
+      name_prefix: "[qa ${workspace.current_user.short_name}] " 
+
+  prod:
+    mode: production
+    workspace:
+      host: https://community.cloud.databricks.com
+      root_path: /Workspace/dab-practice/${workspace.current_user.short_name}/${bundle.target}/.bundle
+      file_path:  /Workspace/dab-practice/${workspace.current_user.short_name}/${bundle.target}/
+    run_as:
+      user_name: paola.posada@lovelytics.com
+    variables:
+      catalog: data-growth
+    presets:
+      name_prefix: "[prod ${workspace.current_user.short_name}] "
+    resources:
+      jobs:
+        dab_practice_job:
+          trigger:
+            pause_status: UNPAUSED    
+          email_notifications:
+            on_failure:
+              - paola.posada@lovelytics.com
+            on_success:
+              - paola.posada@lovelytics.com 
+
