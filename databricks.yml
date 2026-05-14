@@ -3,7 +3,7 @@ bundle:
 
 variables:
   catalog:
-    default: data-growth
+    default: main
   schema:
     default: ${resources.schemas.dab_schema.name}
   volume_path:
@@ -26,7 +26,7 @@ targets:
     workspace:
       host: https://dbc-55c726ba-bdfb.cloud.databricks.com
     variables:
-      catalog: data-growth
+      catalog: main
 
   qa:
     mode: production
@@ -37,7 +37,7 @@ targets:
     run_as:
       user_name: paola.posada@lovelytics.com
     variables:
-      catalog: data-growth
+      catalog: main
     presets:
       name_prefix: "[qa ${workspace.current_user.short_name}] " 
 
@@ -50,7 +50,7 @@ targets:
     run_as:
       user_name: paola.posada@lovelytics.com
     variables:
-      catalog: data-growth
+      catalog: main
     presets:
       name_prefix: "[prod ${workspace.current_user.short_name}] "
     resources:
