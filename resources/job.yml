@@ -23,7 +23,7 @@ resources:
         # Task 1: notebook de ingesta
         - task_key: ingest_task
           notebook_task:
-            notebook_path: ../src/create_table
+            notebook_path: ../src/create_table.ipynb
             base_parameters:
               catalog: "{{job.parameters.catalog}}"
               schema:  "{{job.parameters.schema}}"
